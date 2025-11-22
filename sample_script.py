@@ -3,14 +3,22 @@ import json
 import random
 from pathlib import Path
 from typing import List, Dict, Any
-from google.colab import ai
+#from google.colab import ai
+from google import genai
+import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+gemini_api_key = os.getenv("GEMINI_API_KEY")
 
 # ---- CONFIG (you already had this, keep or adjust) ----
 
-DATASET_PATH = "input_data.json"      # your dataset file
-OUTPUT_PATH = "rag_results.jsonl"  # where to save generations
+DATASET_PATH = "data/input_data.json"      # your dataset file
+OUTPUT_PATH = "results/rag_results.jsonl"  # where to save generations
 
-MODEL_NAME = "google/gemini-2.5-flash"  # choose any model from ai.list_models()
+#MODEL_NAME = "google/gemini-2.5-flash"  # choose any model from ai.list_models()
+MODEL_NAME = "gemini-2.5-flash"
 SEED = 42
 
 SYSTEM_TEMPLATE = (
@@ -27,6 +35,8 @@ PROMPT_VARIANTS = {
     "baseline": SYSTEM_TEMPLATE,
     # add more
 }
+
+client = genai.Client(api_key=gemini_api_key)
 
 # ---- UTILS ----
 
@@ -73,12 +83,16 @@ def build_system_prompt(question: str, context: str, template: str) -> str:
     return template.format(question=question, context=context)
 
 
+# Cant have a single model hard-coded
 def call_model(prompt: str, model_name: str = MODEL_NAME) -> str:
     """
     Single-call wrapper around google.colab.ai.generate_text.
     """
     # ai.generate_text returns a string already
-    return ai.generate_text(prompt, model_name=model_name).strip()
+    #return ai.generate_text(prompt, model_name=model_name).strip()
+    return client.models.generate_content(
+        model=model_name, contents=prompt
+    ).text.strip()
 
 
 def save_jsonl(records: List[Dict[str, Any]], path: str) -> None:
@@ -114,7 +128,9 @@ def run_rag_evaluation():
             system_prompt = build_system_prompt(question, context_str, template)
 
             try:
+                # model name needs to be variable, as well as potentially model instance
                 model_answer = call_model(system_prompt, MODEL_NAME)
+                time.sleep(10)
             except Exception as e:
                 print(f"[ERROR] item {idx}, variant '{variant_name}': {e}")
                 model_answer = f"[ERROR] {e}"
