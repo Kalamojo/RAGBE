@@ -1,0 +1,384 @@
+{
+  "items": [
+    {
+      "question": "What is the primary function of the mitochondria in a cell?",
+      "relevant_docs": [
+        "Mitochondria are membrane-bound organelles responsible for producing ATP, the cell's main energy currency.",
+        "Cells rely on mitochondria to convert nutrients into usable energy through the process of oxidative phosphorylation.",
+        "The mitochondria support cellular respiration, enabling the cell to perform functions requiring energy."
+      ],
+      "irrelevant_docs": [
+        "The Eiffel Tower was completed in 1889 and stands as a symbol of Paris, France.",
+        "Solar panels convert sunlight into electricity using photovoltaic cells.",
+        "Mount Everest is the tallest mountain above sea level at 8,848 meters.",
+        "The Amazon rainforest is home to millions of species and produces significant global oxygen.",
+        "Shakespeare wrote tragedies such as Macbeth and Romeo and Juliet.",
+        "Modern trains can reach speeds over 300 kilometers per hour using magnetic levitation technology.",
+        "The Great Barrier Reef is located off the coast of Queensland, Australia.",
+        "Basketball was invented by James Naismith in 1891."
+      ],
+      "gold_answer": "The mitochondria produce ATP and serve as the cell\u2019s primary source of energy."
+    },
+    {
+      "question": "Who proposed the theory of general relativity?",
+      "relevant_docs": [
+        "Albert Einstein developed the theory of general relativity, which describes gravity as the curvature of spacetime.",
+        "General relativity was published by Einstein in 1915 and revolutionized the understanding of gravitational phenomena.",
+        "Einstein\u2019s theory replaced Newton\u2019s gravitational model by explaining how mass warps spacetime."
+      ],
+      "irrelevant_docs": [
+        "The ancient Romans built aqueducts to transport water across great distances.",
+        "Photosynthesis converts light into chemical energy in plants.",
+        "The Sahara Desert is the largest hot desert in the world.",
+        "Penguins are flightless birds primarily found in the Southern Hemisphere.",
+        "The novel '1984' was written by George Orwell.",
+        "Saturn is famous for its prominent ring system composed of ice and rock.",
+        "Python is a high-level programming language known for its readability.",
+        "The violin is a string instrument used in classical orchestras."
+      ],
+      "gold_answer": "Albert Einstein proposed the theory of general relativity."
+    },
+    {
+      "question": "What gas do plants absorb during photosynthesis?",
+      "relevant_docs": [
+        "During photosynthesis, plants absorb carbon dioxide from the air.",
+        "Carbon dioxide, water, and sunlight are essential components for producing glucose in plants.",
+        "Plants use chlorophyll to capture light energy and convert carbon dioxide into sugars."
+      ],
+      "irrelevant_docs": [
+        "The Great Wall of China spans thousands of miles across northern China.",
+        "Venus is the second planet from the Sun and has extreme surface temperatures.",
+        "The human heart contains four chambers: two atria and two ventricles.",
+        "Copper has high electrical conductivity and is used in wiring.",
+        "The Olympics originated in ancient Greece.",
+        "The Mona Lisa was painted by Leonardo da Vinci.",
+        "Electric cars use rechargeable lithium-ion batteries.",
+        "The Pacific Ocean is the largest ocean on Earth."
+      ],
+      "gold_answer": "Plants absorb carbon dioxide during photosynthesis."
+    },
+    {
+      "question": "What is the capital of Japan?",
+      "relevant_docs": [
+        "Tokyo is the capital city of Japan and one of the most populous metropolitan areas in the world.",
+        "Japan\u2019s political, cultural, and economic center is located in Tokyo.",
+        "The Japanese government and imperial residence are both based in Tokyo."
+      ],
+      "irrelevant_docs": [
+        "Mount Kilimanjaro is located in Tanzania and is the highest peak in Africa.",
+        "The human liver is responsible for detoxification and metabolism.",
+        "Diamonds are composed of carbon atoms arranged in a crystal lattice.",
+        "Water boils at 100 degrees Celsius at standard atmospheric pressure.",
+        "Jupiter has over 70 known moons orbiting it.",
+        "The poem 'The Raven' was written by Edgar Allan Poe.",
+        "Antarctica is the coldest continent on Earth.",
+        "The Pythagorean theorem relates the sides of a right triangle."
+      ],
+      "gold_answer": "The capital of Japan is Tokyo."
+    },
+    {
+      "question": "Which element has the chemical symbol 'Fe'?",
+      "relevant_docs": [
+        "The chemical symbol 'Fe' stands for iron, a metallic element used extensively in construction.",
+        "Iron (Fe) is one of the most abundant elements in Earth\u2019s crust and a major component of steel.",
+        "The symbol Fe originates from the Latin word 'ferrum', meaning iron."
+      ],
+      "irrelevant_docs": [
+        "Mars is often called the red planet due to iron oxide on its surface.",
+        "The Colosseum in Rome could hold tens of thousands of spectators.",
+        "Whales are the largest mammals on Earth.",
+        "The Taj Mahal was built during the Mughal Empire.",
+        "Chocolate is made from cacao beans grown in tropical regions.",
+        "Basketball teams typically have five players on the court.",
+        "The Renaissance began in Italy in the 14th century.",
+        "Hurricanes form over warm ocean waters."
+      ],
+      "gold_answer": "The element with the symbol 'Fe' is iron."
+    },
+    {
+      "question": "Which organ pumps blood throughout the human body?",
+      "relevant_docs": [
+        "The heart is responsible for pumping blood throughout the circulatory system.",
+        "Blood circulates through the body via rhythmic contractions of the heart\u2019s chambers.",
+        "The human heart maintains oxygen delivery by continuously pumping blood."
+      ],
+      "irrelevant_docs": [
+        "Mount Fuji is the highest mountain in Japan.",
+        "Aluminum is known for being lightweight and corrosion-resistant.",
+        "Tigers are apex predators found primarily in Asia.",
+        "The Leaning Tower of Pisa is famous for its tilt.",
+        "Venus flytraps capture insects using rapid leaf movements.",
+        "Chess originated in India over a thousand years ago.",
+        "Bluetooth technology allows short-range wireless communication.",
+        "Polar bears primarily inhabit the Arctic region."
+      ],
+      "gold_answer": "The heart pumps blood through the human body."
+    },
+    {
+      "question": "What is the largest planet in the Solar System?",
+      "relevant_docs": [
+        "Jupiter is the largest planet in the Solar System and is classified as a gas giant.",
+        "The mass of Jupiter exceeds the combined mass of all other planets in the Solar System.",
+        "Jupiter's Great Red Spot is a massive storm visible even through small telescopes."
+      ],
+      "irrelevant_docs": [
+        "The Korean peninsula is divided into two nations.",
+        "Cheetahs can reach speeds of up to 70 miles per hour.",
+        "The Nile River is commonly cited as the longest river in the world.",
+        "A hexagon has six sides.",
+        "Mozart was a prolific composer in the Classical era.",
+        "Copper sulfate forms bright blue crystals.",
+        "The Amazon River flows through South America.",
+        "Basketball rims are typically 10 feet high."
+      ],
+      "gold_answer": "Jupiter is the largest planet in the Solar System."
+    },
+    {
+      "question": "Who wrote the play 'Romeo and Juliet'?",
+      "relevant_docs": [
+        "William Shakespeare authored the tragedy 'Romeo and Juliet'.",
+        "Shakespeare wrote numerous plays, including the tragedy about two star-crossed lovers in Verona.",
+        "The play 'Romeo and Juliet' is one of Shakespeare\u2019s best-known works."
+      ],
+      "irrelevant_docs": [
+        "Pluto was reclassified as a dwarf planet in 2006.",
+        "The Andes is the longest continental mountain range.",
+        "Coral reefs are highly sensitive to temperature changes.",
+        "The Wright brothers made the first powered flight.",
+        "Linux is an open-source operating system.",
+        "The cheetah is the fastest land animal.",
+        "The Rosetta Stone helped decode Egyptian hieroglyphs.",
+        "Tornadoes can form from rotating thunderstorms."
+      ],
+      "gold_answer": "William Shakespeare wrote 'Romeo and Juliet'."
+    },
+    {
+      "question": "What is the freezing point of water in Celsius?",
+      "relevant_docs": [
+        "Water freezes at 0 degrees Celsius under standard atmospheric pressure.",
+        "At 0\u00b0C, water transitions from a liquid to a solid state.",
+        "The Celsius scale defines 0\u00b0 as the freezing point of water."
+      ],
+      "irrelevant_docs": [
+        "The Great Lakes border both the United States and Canada.",
+        "Bees communicate using waggle dances.",
+        "The Roman numeral for 100 is 'C'.",
+        "Mount Rainier is a volcano located in Washington State.",
+        "Lightning is caused by electrical discharges in the atmosphere.",
+        "Satellites orbit Earth at various altitudes.",
+        "Photosynthesis primarily occurs in chloroplasts.",
+        "Bananas are rich in potassium."
+      ],
+      "gold_answer": "Water freezes at 0 degrees Celsius."
+    },
+    {
+      "question": "What is the largest ocean on Earth?",
+      "relevant_docs": [
+        "The Pacific Ocean is the largest ocean on Earth, covering more than 60 million square miles.",
+        "The Pacific Ocean extends from the Arctic in the north to the Southern Ocean in the south.",
+        "It is significantly larger than the Atlantic, Indian, and other oceans."
+      ],
+      "irrelevant_docs": [
+        "The Parthenon stands on the Acropolis in Athens, Greece.",
+        "A triangle has three sides and three angles.",
+        "The novel 'Pride and Prejudice' was written by Jane Austen.",
+        "The cheetah is capable of accelerating from 0 to 60 mph in a few seconds.",
+        "Neurons transmit signals through electrical impulses.",
+        "The Golden Gate Bridge is located in San Francisco.",
+        "Mercury is the smallest planet in the Solar System.",
+        "Pandas primarily eat bamboo."
+      ],
+      "gold_answer": "The Pacific Ocean is the largest ocean on Earth."
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "relevant_docs": [
+        "Mars is often called the Red Planet due to the iron oxide on its surface.",
+        "The reddish appearance of Mars is visible even to the naked eye from Earth.",
+        "Mars is the fourth planet from the Sun and has two moons, Phobos and Deimos."
+      ],
+      "irrelevant_docs": [
+        "Romeo and Juliet is a tragedy by William Shakespeare.",
+        "The Yangtze River is the longest river in Asia.",
+        "Giraffes are the tallest land animals.",
+        "The violin typically has four strings.",
+        "Hurricanes rotate counterclockwise in the Northern Hemisphere.",
+        "Bluetooth allows devices to connect wirelessly over short distances.",
+        "The Leaning Tower of Pisa has a noticeable tilt.",
+        "Photosynthesis produces oxygen as a byproduct."
+      ],
+      "gold_answer": "Mars is known as the Red Planet."
+    },
+    {
+      "question": "Who painted the Mona Lisa?",
+      "relevant_docs": [
+        "Leonardo da Vinci painted the Mona Lisa during the Italian Renaissance.",
+        "The Mona Lisa is housed in the Louvre Museum in Paris.",
+        "Da Vinci's painting is famous for its enigmatic smile and detailed technique."
+      ],
+      "irrelevant_docs": [
+        "Mount Everest reaches an elevation of 8,848 meters.",
+        "Tesla manufactures electric cars and energy storage products.",
+        "The heart contains four chambers.",
+        "Penguins cannot fly but are excellent swimmers.",
+        "The Amazon River basin spans several South American countries.",
+        "Shakespeare wrote many influential plays.",
+        "A square has four equal sides.",
+        "Baking soda is also known as sodium bicarbonate."
+      ],
+      "gold_answer": "The Mona Lisa was painted by Leonardo da Vinci."
+    },
+    {
+      "question": "What molecule carries genetic information in living organisms?",
+      "relevant_docs": [
+        "DNA, or deoxyribonucleic acid, stores genetic information in nearly all living organisms.",
+        "The structure of DNA is a double helix composed of nucleotides.",
+        "Genes encoded in DNA determine traits and direct cellular functions."
+      ],
+      "irrelevant_docs": [
+        "The Earth orbits the Sun once every 365 days.",
+        "Basketball was created by James Naismith.",
+        "The piano produces sound when hammers strike strings.",
+        "Most deserts receive very little rainfall each year.",
+        "Carbon dioxide is a greenhouse gas.",
+        "Horses were domesticated thousands of years ago.",
+        "The Statue of Liberty was a gift from France.",
+        "Caterpillars transform into butterflies through metamorphosis."
+      ],
+      "gold_answer": "DNA carries genetic information in living organisms."
+    },
+    {
+      "question": "Which country invented paper?",
+      "relevant_docs": [
+        "Paper was invented in ancient China during the Han Dynasty.",
+        "Historical records attribute the invention of paper to Cai Lun in 105 CE.",
+        "Early Chinese paper was made from mulberry bark, hemp, and rags."
+      ],
+      "irrelevant_docs": [
+        "The Pacific Ocean contains thousands of islands.",
+        "Bananas are high in potassium.",
+        "Einstein developed the theory of relativity.",
+        "Mount Rushmore features four U.S. presidents.",
+        "Bees pollinate many flowering plants.",
+        "Venus is the hottest planet in the Solar System.",
+        "Soccer is played with a round ball.",
+        "Glass is made by heating sand to high temperatures."
+      ],
+      "gold_answer": "Paper was invented in ancient China."
+    },
+    {
+      "question": "What is the chemical formula for water?",
+      "relevant_docs": [
+        "Water's chemical formula is H2O, meaning it contains two hydrogen atoms and one oxygen atom.",
+        "The H2O molecule is essential for life and exhibits unique properties such as cohesion and surface tension.",
+        "Most of Earth's surface is covered by water in liquid form."
+      ],
+      "irrelevant_docs": [
+        "The Eiffel Tower is located in Paris.",
+        "Cheetahs can run faster than any other land animal.",
+        "The violin family includes the viola and cello.",
+        "Mount Kilimanjaro has three volcanic cones.",
+        "Lightning occurs due to electrical charges in clouds.",
+        "Copper is commonly used in electrical wiring.",
+        "Penguins live in the Southern Hemisphere.",
+        "Tulips originated from Central Asia."
+      ],
+      "gold_answer": "The chemical formula for water is H2O."
+    },
+    {
+      "question": "What is the fastest land animal?",
+      "relevant_docs": [
+        "The cheetah is the fastest land animal, capable of reaching speeds up to 70 miles per hour.",
+        "Cheetahs accelerate extremely quickly due to their lightweight bodies and strong leg muscles.",
+        "Their speed allows them to hunt prey in short, intense bursts."
+      ],
+      "irrelevant_docs": [
+        "Earth is the third planet from the Sun.",
+        "The Great Wall of China was built over many centuries.",
+        "Bats are the only mammals capable of sustained flight.",
+        "The piano is a percussion instrument.",
+        "Venus appears bright in the night sky due to its reflective clouds.",
+        "The Mississippi River flows through the central United States.",
+        "Diamonds are formed under high pressure deep underground.",
+        "Chocolate is made from cacao seeds."
+      ],
+      "gold_answer": "The fastest land animal is the cheetah."
+    },
+    {
+      "question": "Which continent is the Sahara Desert located on?",
+      "relevant_docs": [
+        "The Sahara Desert is located on the African continent.",
+        "It is the largest hot desert in the world and spans several North African countries.",
+        "The Sahara covers an area over 9 million square kilometers."
+      ],
+      "irrelevant_docs": [
+        "Gold is a highly conductive metal.",
+        "The Pythagorean theorem relates the sides of a right triangle.",
+        "The brainstem controls involuntary functions.",
+        "Mount Rainier is an active volcano in the United States.",
+        "Butterflies have four wings.",
+        "Volleyball is played with six players per team on the court.",
+        "Saturn has a prominent ring system.",
+        "Apples grow on deciduous trees."
+      ],
+      "gold_answer": "The Sahara Desert is located in Africa."
+    },
+    {
+      "question": "Who was the first president of the United States?",
+      "relevant_docs": [
+        "George Washington served as the first president of the United States from 1789 to 1797.",
+        "Washington played a key role in the American Revolution and the founding of the nation.",
+        "He is often called the 'Father of His Country' for his leadership."
+      ],
+      "irrelevant_docs": [
+        "Australia is both a country and a continent.",
+        "Bears hibernate to conserve energy in winter.",
+        "The speed of light is approximately 299,792 kilometers per second.",
+        "Mount Olympus was considered the home of the Greek gods.",
+        "Coal is formed from ancient plant material.",
+        "The Amazon rainforest is located in South America.",
+        "Basketball was invented in the 19th century.",
+        "Snowflakes form around microscopic particles."
+      ],
+      "gold_answer": "George Washington was the first U.S. president."
+    },
+    {
+      "question": "What do bees collect to make honey?",
+      "relevant_docs": [
+        "Bees collect nectar from flowers and convert it into honey.",
+        "Worker bees gather nectar and store it in the hive, where enzymes break it down.",
+        "Honey production involves dehydrating nectar until it thickens into honey."
+      ],
+      "irrelevant_docs": [
+        "Salt dissolves readily in water.",
+        "Mount Fuji is a symbol of Japan.",
+        "Mars has two small moons called Phobos and Deimos.",
+        "Copper has excellent thermal conductivity.",
+        "The violin is often used in orchestral music.",
+        "Polar bears have thick layers of fat for insulation.",
+        "Photosynthesis occurs in chloroplasts.",
+        "The Statue of Liberty stands in New York."
+      ],
+      "gold_answer": "Bees collect nectar to make honey."
+    },
+    {
+      "question": "What device measures atmospheric pressure?",
+      "relevant_docs": [
+        "A barometer is an instrument used to measure atmospheric pressure.",
+        "Meteorologists use barometers to forecast weather based on pressure changes.",
+        "Barometers can be digital, aneroid, or mercury-based."
+      ],
+      "irrelevant_docs": [
+        "The Amazon River flows eastward into the Atlantic Ocean.",
+        "The moon orbits Earth approximately every 27 days.",
+        "Lions live in prides on the African savanna.",
+        "Table salt consists mainly of sodium chloride.",
+        "Mount Everest is located in the Himalayas.",
+        "A triangle's angles add up to 180 degrees.",
+        "Orange juice contains high levels of vitamin C.",
+        "Bicycles use gears to change mechanical advantage."
+      ],
+      "gold_answer": "A barometer measures atmospheric pressure."
+    }
+  ]
+}
