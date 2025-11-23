@@ -3,8 +3,8 @@ import json
 import random
 from pathlib import Path
 from typing import List, Dict, Any
-#from google.colab import ai
-from google import genai
+from google.colab import ai
+#from google import genai
 import time
 import os
 from dotenv import load_dotenv
@@ -17,8 +17,8 @@ gemini_api_key = os.getenv("GEMINI_API_KEY")
 DATASET_PATH = "data/input_data.json"      # your dataset file
 OUTPUT_PATH = "results/rag_results.jsonl"  # where to save generations
 
-#MODEL_NAME = "google/gemini-2.5-flash"  # choose any model from ai.list_models()
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "google/gemini-2.5-flash"  # choose any model from ai.list_models()
+#MODEL_NAME = "gemini-2.5-flash"
 SEED = 42
 
 SYSTEM_TEMPLATE = (
@@ -36,7 +36,7 @@ PROMPT_VARIANTS = {
     # add more
 }
 
-client = genai.Client(api_key=gemini_api_key)
+#client = genai.Client(api_key=gemini_api_key)
 
 # ---- UTILS ----
 
@@ -89,10 +89,10 @@ def call_model(prompt: str, model_name: str = MODEL_NAME) -> str:
     Single-call wrapper around google.colab.ai.generate_text.
     """
     # ai.generate_text returns a string already
-    #return ai.generate_text(prompt, model_name=model_name).strip()
-    return client.models.generate_content(
-        model=model_name, contents=prompt
-    ).text.strip()
+    return ai.generate_text(prompt, model_name=model_name).strip()
+    # return client.models.generate_content(
+    #     model=model_name, contents=prompt
+    # ).text.strip()
 
 
 def save_jsonl(records: List[Dict[str, Any]], path: str) -> None:
