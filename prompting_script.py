@@ -114,13 +114,13 @@ def call_model(prompt_messages: list[dict[str, str]], is_gemini: bool, model_nam
         # ).text.strip()
     else:
         response: ChatResponse = chat(model=model_name, messages=prompt_messages)
-        answer = response.message.content
+        answer = response.message.content.strip()
     
     if answer_start is not None:
         start_ind = answer.lower().find(answer_start.lower())
         if start_ind == -1:
             return answer
-        return answer[start_ind + len(answer_start)]
+        return answer[start_ind + len(answer_start):]
 
     return answer
 
