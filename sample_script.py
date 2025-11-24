@@ -1,18 +1,18 @@
 # Around 30-40 secs to execute 20 prompts on google colab with cpu
+from google.colab import ai
 import json
 import random
 from pathlib import Path
 from typing import List, Dict, Any
-from google.colab import ai
 #from google import genai
-import time
-import os
-from dotenv import load_dotenv
+# import time
+# import os
+# from dotenv import load_dotenv
 
-load_dotenv()
-gemini_api_key = os.getenv("GEMINI_API_KEY")
+# load_dotenv()
+# gemini_api_key = os.getenv("GEMINI_API_KEY")
 
-# ---- CONFIG (you already had this, keep or adjust) ----
+# ---- CONFIG ----
 
 DATASET_PATH = "data/input_data.json"      # your dataset file
 OUTPUT_PATH = "results/rag_results.jsonl"  # where to save generations
@@ -33,12 +33,24 @@ SYSTEM_TEMPLATE = (
 
 PROMPT_VARIANTS = {
     "baseline": SYSTEM_TEMPLATE,
-    # add more
+    # later you can add:
+    # "doc_only_strict": "...",
+    # "cot": "...",
 }
+
+# NEW: which *document condition* you want to test
+CONTEXT_CONDITIONS = [
+    "relevant_only",
+    "irrelevant_only",
+    "mixed",
+    # if you ever want the original behavior back, add:
+    # "mixed",
+]
 
 #client = genai.Client(api_key=gemini_api_key)
 
 # ---- UTILS ----
+
 
 def load_dataset(path: str) -> List[Dict[str, Any]]:
     """
@@ -60,17 +72,30 @@ def load_dataset(path: str) -> List[Dict[str, Any]]:
     return data["items"]
 
 
-def build_context(item: Dict[str, Any], shuffle: bool = True):
+def build_context(
+    item: Dict[str, Any],
+    condition: str = "relevant_only",
+    shuffle: bool = True,
+):
     """
-    Combine relevant + irrelevant docs into one context string.
-    Also keep labels so you can analyze later.
+    Build a context string according to the condition:
+    - 'relevant_only'   -> only relevant_docs
+    - 'irrelevant_only' -> only irrelevant_docs
+    - 'mixed'           -> both (original behavior, if you want it)
+
+    Returns:
+        context_str: str
+        docs: list of {"text": ..., "label": "relevant"/"irrelevant"}
     """
     docs = []
 
-    for d in item["relevant_docs"]:
-        docs.append({"text": d, "label": "relevant"})
-    for d in item["irrelevant_docs"]:
-        docs.append({"text": d, "label": "irrelevant"})
+    if condition in ("relevant_only", "mixed"):
+        for d in item.get("relevant_docs", []):
+            docs.append({"text": d, "label": "relevant"})
+
+    if condition in ("irrelevant_only", "mixed"):
+        for d in item.get("irrelevant_docs", []):
+            docs.append({"text": d, "label": "irrelevant"})
 
     if shuffle:
         random.shuffle(docs)
@@ -88,7 +113,6 @@ def call_model(prompt: str, model_name: str = MODEL_NAME) -> str:
     """
     Single-call wrapper around google.colab.ai.generate_text.
     """
-    # ai.generate_text returns a string already
     return ai.generate_text(prompt, model_name=model_name).strip()
     # return client.models.generate_content(
     #     model=model_name, contents=prompt
@@ -121,34 +145,42 @@ def run_rag_evaluation():
         question = item["question"]
         gold_answer = item.get("gold_answer", "")
 
-        # Build combined context (RAG)
-        context_str, docs_metadata = build_context(item, shuffle=True)
+        for context_condition in CONTEXT_CONDITIONS:
+            # Build context according to condition (relevant_only / irrelevant_only / mixed)
+            context_str, docs_metadata = build_context(
+                item,
+                condition=context_condition,
+                shuffle=False,
+            )
 
-        for variant_name, template in PROMPT_VARIANTS.items():
-            system_prompt = build_system_prompt(question, context_str, template)
+            for variant_name, template in PROMPT_VARIANTS.items():
+                system_prompt = build_system_prompt(
+                    question, context_str, template)
 
-            try:
-                # model name needs to be variable, as well as potentially model instance
-                model_answer = call_model(system_prompt, MODEL_NAME)
-                time.sleep(10)
-            except Exception as e:
-                print(f"[ERROR] item {idx}, variant '{variant_name}': {e}")
-                model_answer = f"[ERROR] {e}"
+                try:
+                    model_answer = call_model(system_prompt, MODEL_NAME)
+                    #time.sleep(10)
+                except Exception as e:
+                    print(f"[ERROR] item {idx}, variant '{variant_name}', "
+                          f"context '{context_condition}': {e}")
+                    model_answer = f"[ERROR] {e}"
 
-            record = {
-                "item_index": idx,
-                "prompt_variant": variant_name,
-                "question": question,
-                "gold_answer": gold_answer,
-                "context": context_str,
-                "documents": docs_metadata,   # each has text + label
-                "system_prompt": system_prompt,
-                "model_answer": model_answer,
-            }
-            results.append(record)
+                record = {
+                    "item_index": idx,
+                    "prompt_variant": variant_name,
+                    "context_condition": context_condition,  # <--- key for analysis
+                    "question": question,
+                    "gold_answer": gold_answer,
+                    "context": context_str,
+                    "documents": docs_metadata,   # each has text + label
+                    "system_prompt": system_prompt,
+                    "model_answer": model_answer,
+                }
+                results.append(record)
 
-            print(f"[{idx:03d}][{variant_name}] Q: {question}")
-            print(f" -> {model_answer}\n")
+                print(
+                    f"[{idx:03d}][{variant_name}][{context_condition}] Q: {question}")
+                print(f" -> {model_answer}\n")
 
     save_jsonl(results, OUTPUT_PATH)
     print(f"\nSaved {len(results)} generations to {OUTPUT_PATH}")
