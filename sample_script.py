@@ -4,7 +4,10 @@ import json
 import random
 from pathlib import Path
 from typing import List, Dict, Any
+from ollama import chat
+from ollama import ChatResponse
 #from google import genai
+#from tqdm import tqdm
 # import time
 # import os
 # from dotenv import load_dotenv
@@ -14,25 +17,51 @@ from typing import List, Dict, Any
 
 # ---- CONFIG ----
 
-DATASET_PATH = "data/input_data.json"      # your dataset file
-OUTPUT_PATH = "results/rag_results.jsonl"  # where to save generations
+#DATASET_PATH = "input_data.json"      # your dataset file
+DATASET_PATH = "data/input_data.json" 
 
-MODEL_NAME = "google/gemini-2.5-flash"  # choose any model from ai.list_models()
+#MODEL_NAME = "google/gemini-2.5-flash"  # choose any model from ai.list_models()
 #MODEL_NAME = "gemini-2.5-flash"
+#MODEL_NAME = "llama2:7b"
+#MODEL_NAME = "llama3.2"
+#MODEL_NAME = "llama3.2:1b"
+MODEL_NAME = "qwen3:4b"
+IS_GEMINI = False
+
+#OUTPUT_PATH = "rag_results.jsonl"  # where to save generations
+OUTPUT_PATH = f"results/rag_results_{MODEL_NAME}.jsonl"
+
 SEED = 42
 
-SYSTEM_TEMPLATE = (
-    "You are an assistant for question-answering tasks. "
-    "Use the following pieces of retrieved context to answer the question. "
-    "If you don't know the answer, just say that you don't know. "
-    "Use one sentence maximum and keep the answer concise.\n"
-    "Question: {question}\n"
-    "Context: {context}\n"
-    "Answer:"
-)
-
 PROMPT_VARIANTS = {
-    "baseline": SYSTEM_TEMPLATE,
+    "baseline": (
+        "You are an assistant for question-answering tasks. "
+        "Use the following pieces of retrieved context to answer the question. "
+        "If you don't know the answer, just say that you don't know. "
+        "Use one sentence maximum and keep the answer concise.\n"
+        "Question: {question}\n"
+        "Context: {context}\n"
+        "Answer:"
+    ),
+    "llamaindex": (
+        "We have provided context information below."
+        "---------------------"
+        "{context}"
+        "---------------------"
+        "Given this information, please answer the question: {question}"
+    ),
+    "claude_rag": (
+        "You have been tasked with helping us to answer the following query: "
+        "<query>"
+        "{question}"
+        "</query>"
+        "You have access to the following documents which are meant to provide context as you answer the query:"
+        "<documents>"
+        "{context}"
+        "</documents>"
+        "Please remain faithful to the underlying context, and only deviate from it if you are 100% sure that you know the answer already. "
+        "Answer the question now, and avoid providing preamble such as 'Here is the answer', etc"
+    )
     # later you can add:
     # "doc_only_strict": "...",
     # "cot": "...",
@@ -74,8 +103,7 @@ def load_dataset(path: str) -> List[Dict[str, Any]]:
 
 def build_context(
     item: Dict[str, Any],
-    condition: str = "relevant_only",
-    shuffle: bool = True,
+    condition: str = "relevant_only"
 ):
     """
     Build a context string according to the condition:
@@ -97,7 +125,7 @@ def build_context(
         for d in item.get("irrelevant_docs", []):
             docs.append({"text": d, "label": "irrelevant"})
 
-    if shuffle:
+    if condition == "mixed":
         random.shuffle(docs)
 
     context_str = "\n\n".join(d["text"] for d in docs)
@@ -109,14 +137,23 @@ def build_system_prompt(question: str, context: str, template: str) -> str:
 
 
 # Cant have a single model hard-coded
-def call_model(prompt: str, model_name: str = MODEL_NAME) -> str:
+def call_model(prompt: str, is_gemini: bool, model_name: str = MODEL_NAME) -> str:
     """
     Single-call wrapper around google.colab.ai.generate_text.
     """
-    return ai.generate_text(prompt, model_name=model_name).strip()
-    # return client.models.generate_content(
-    #     model=model_name, contents=prompt
-    # ).text.strip()
+    if is_gemini:
+        return ai.generate_text(prompt, model_name=model_name).strip()
+        # return client.models.generate_content(
+        #     model=model_name, contents=prompt
+        # ).text.strip()
+    response: ChatResponse = chat(model=model_name, messages=[
+        {
+            'role': 'user',
+            'content': prompt,
+        },
+    ])
+
+    return response.message.content
 
 
 def save_jsonl(records: List[Dict[str, Any]], path: str) -> None:
@@ -150,7 +187,7 @@ def run_rag_evaluation():
             context_str, docs_metadata = build_context(
                 item,
                 condition=context_condition,
-                shuffle=False,
+                #shuffle=False,
             )
 
             for variant_name, template in PROMPT_VARIANTS.items():
@@ -158,7 +195,7 @@ def run_rag_evaluation():
                     question, context_str, template)
 
                 try:
-                    model_answer = call_model(system_prompt, MODEL_NAME)
+                    model_answer = call_model(system_prompt, IS_GEMINI, MODEL_NAME)
                     #time.sleep(10)
                 except Exception as e:
                     print(f"[ERROR] item {idx}, variant '{variant_name}', "
@@ -167,6 +204,7 @@ def run_rag_evaluation():
 
                 record = {
                     "item_index": idx,
+                    "model_name": MODEL_NAME,
                     "prompt_variant": variant_name,
                     "context_condition": context_condition,  # <--- key for analysis
                     "question": question,

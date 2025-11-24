@@ -45,7 +45,8 @@ class BertScore(Metric):
         super().__init__('bert_score')
 
     def score_many(self, references: pl.Series, candidates: pl.Series) -> dict[str, list[float]]:
-        scores = score_bert(candidates.to_list(), references.to_list(), lang='en', use_fast_tokenizer=True)
+        scores = score_bert(candidates.to_list(), references.to_list(), 
+                            rescale_with_baseline=True, lang='en', use_fast_tokenizer=True)
         result = {
             self.name + "_precision": scores[0].tolist(),
             self.name + "_recall": scores[1].tolist()

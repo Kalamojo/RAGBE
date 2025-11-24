@@ -4,3 +4,4 @@ rouge-score
 polars
 bert-score
 ipywidgets
+ollama
