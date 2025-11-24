@@ -117,7 +117,7 @@ def call_model(prompt_messages: list[dict[str, str]], is_gemini: bool, model_nam
         answer = response.message.content
     
     if answer_start is not None:
-        start_ind = answer.find(answer_start)
+        start_ind = answer.lower().find(answer_start.lower())
         if start_ind == -1:
             return answer
         return answer[start_ind + len(answer_start)]
