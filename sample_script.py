@@ -103,7 +103,8 @@ def load_dataset(path: str) -> List[Dict[str, Any]]:
 
 def build_context(
     item: Dict[str, Any],
-    condition: str = "relevant_only"
+    condition: str = "relevant_only",
+    shuffle: bool = False
 ):
     """
     Build a context string according to the condition:
@@ -125,7 +126,7 @@ def build_context(
         for d in item.get("irrelevant_docs", []):
             docs.append({"text": d, "label": "irrelevant"})
 
-    if condition == "mixed":
+    if shuffle:
         random.shuffle(docs)
 
     context_str = "\n\n".join(d["text"] for d in docs)
@@ -187,7 +188,7 @@ def run_rag_evaluation():
             context_str, docs_metadata = build_context(
                 item,
                 condition=context_condition,
-                #shuffle=False,
+                shuffle=(context_condition == "mixed"),
             )
 
             for variant_name, template in PROMPT_VARIANTS.items():
