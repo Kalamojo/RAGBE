@@ -21,8 +21,8 @@ class RougeL(Metric):
 
     def score_many(self, references: pl.Series, candidates: pl.Series) -> dict[str, list[float]]:
         result = defaultdict(list)
-        for ref, cand in zip(references, candidates):
-            score = self.scorer.score(ref, cand)[self.name]
+        for refs, cand in zip(references, candidates):
+            score = self.scorer.score_multi(refs, cand)[self.name]
             result[self.name + "_precision"].append(score.precision)
             result[self.name + "_recall"].append(score.recall)
         
@@ -34,8 +34,8 @@ class BLEU(Metric):
 
     def score_many(self, references: pl.Series, candidates: pl.Series) -> dict[str, list[float]]:
         result = defaultdict(list)
-        for ref, cand in zip(references, candidates):
-            score = bleu_score.sentence_bleu([ref], cand)
+        for refs, cand in zip(references, candidates):
+            score = bleu_score.sentence_bleu(refs, cand)
             result[self.name].append(score)
         
         return result
@@ -45,7 +45,8 @@ class BertScore(Metric):
         super().__init__('bert_score')
 
     def score_many(self, references: pl.Series, candidates: pl.Series) -> dict[str, list[float]]:
-        scores = score_bert(candidates.to_list(), references.to_list(), lang='en', use_fast_tokenizer=True)
+        scores = score_bert(candidates.to_list(), references.to_list(), 
+                            rescale_with_baseline=True, lang='en', use_fast_tokenizer=True)
         result = {
             self.name + "_precision": scores[0].tolist(),
             self.name + "_recall": scores[1].tolist()
