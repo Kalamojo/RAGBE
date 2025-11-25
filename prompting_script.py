@@ -166,7 +166,7 @@ def rag_evaluation(dataset_item: tuple[int, dict[str, any]], context_condition: 
     }
 
     print(
-        f"[{idx:03d}][{prompt_combo["name"]}][{context_condition}] Q: {question}")
+        f"[{idx:03d}][{prompt_combo["name"]}][{context_condition}][{model}] Q: {question}")
     print(f" -> {model_answer}\n")
 
     return record

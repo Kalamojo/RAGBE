@@ -1,17 +1,20 @@
 # from google import genai
-# import os
-# from dotenv import load_dotenv
+import os
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 # gemini_api_key = os.getenv("GEMINI_API_KEY")
-from ollama import chat
-from ollama import ChatResponse
+
+# from ollama import chat
+# from ollama import ChatResponse
+from openai import OpenAI
 
 def main():
+    client = OpenAI()
     #model = "gemini-2.5-flash"
     #model = "gemini-2.5-pro"
     #client = genai.Client(api_key=gemini_api_key)
-    model = "llama2:7b"
+    model = "gpt-4.1"
     #model = "llama3.2"
     #model = "llama3.2:1b"
     #model = "qwen3:4b"
@@ -69,17 +72,21 @@ def main():
     # )
 
     # print(response.text)
-    response: ChatResponse = chat(model=model, messages=[
-        {
-            'role': 'user',
-            'content': prompt,
-        },
-    ])
+    # response: ChatResponse = chat(model=model, messages=[
+    #     {
+    #         'role': 'user',
+    #         'content': prompt,
+    #     },
+    # ])
+    response = client.responses.create(
+        model=model,
+        input=prompt
+    )
 
-    print(response.message.content)
+    print(response.output_text)
     print("-------------------")
-    final_response_ind = response.message.content.find("FINAL ANSWER:")
-    print(response.message.content[final_response_ind + len("FINAL ANSWER:"):].strip())
+    final_response_ind = response.output_text.find("FINAL ANSWER:")
+    print(response.output_text[final_response_ind + len("FINAL ANSWER:"):].strip())
 
     # response = client.models.list()
     # print("Available models:")

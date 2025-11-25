@@ -5,3 +5,6 @@ polars
 bert-score
 ipywidgets
 ollama
+great_tables
+openai
+tikzplotlib
